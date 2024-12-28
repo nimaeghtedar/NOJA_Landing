@@ -413,6 +413,12 @@
           transform: rotate(360deg);
         }
       }
+
+      h1,
+      h2,
+      .section-title {
+        font-family: 'Lalezar', cursive;
+      }
     </style>
   </head>
   <body>
@@ -436,33 +442,16 @@
             <h1 class="slogan" data-aos="zoom-in" data-aos-delay="500">
               خرید جهانی
             </h1>
-            <p class="slogan-accent" data-aos="zoom-in" data-aos-delay="800">
-              به سادگی
-            </p>
-            <p class="slogan" data-aos="zoom-in" data-aos-delay="1100">
-              خرید محلی
-            </p>
+            <p class="slogan-accent">ما در حال راه‌اندازی هستیم</p>
+            <p class="slogan">تجربه‌ای متفاوت در خرید آنلاین به‌زودی!</p>
           </div>
         </div>
       </section>
 
-      <!-- Countdown Section -->
-      <section class="countdown-section" data-aos="fade-up">
-        <h2 class="section-title">راه‌اندازی سیستم</h2>
-        <div class="countdown-container">
-          <div class="countdown-item">
-            <div class="countdown-value" id="hours">12</div>
-            <div class="countdown-label">ساعت</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-value" id="minutes">00</div>
-            <div class="countdown-label">دقیقه</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-value" id="seconds">00</div>
-            <div class="countdown-label">ثانیه</div>
-          </div>
-        </div>
+      <!-- Remove countdown section and replace with a simple coming soon placeholder -->
+      <section class="coming-soon-section" data-aos="fade-up">
+        <h2 class="section-title">کمی صبر کنید...</h2>
+        <p>ما سخت در تلاشیم تا بهترین تجربه خرید بین‌المللی را فراهم کنیم.</p>
       </section>
 
       <!-- Progress Section -->
@@ -580,49 +569,6 @@
         }, 1500);
       });
 
-      // Countdown Timer
-      function startCountdown() {
-        // Get the stored end time or set a new one
-        let countDownDate = localStorage.getItem('nojaCountdownEnd');
-        if (!countDownDate) {
-          countDownDate = new Date().getTime() + 12 * 60 * 60 * 1000; // 12 hours
-          localStorage.setItem('nojaCountdownEnd', countDownDate);
-        }
-
-        function updateCountdown() {
-          const now = new Date().getTime();
-          const distance = countDownDate - now;
-
-          // Time calculations
-          const hours = Math.floor(distance / (1000 * 60 * 60));
-          const minutes = Math.floor(
-            (distance % (1000 * 60 * 60)) / (1000 * 60)
-          );
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          // Display results
-          document.getElementById('hours').textContent = hours
-            .toString()
-            .padStart(2, '0');
-          document.getElementById('minutes').textContent = minutes
-            .toString()
-            .padStart(2, '0');
-          document.getElementById('seconds').textContent = seconds
-            .toString()
-            .padStart(2, '0');
-
-          // If countdown is finished, reset it
-          if (distance < 0) {
-            countDownDate = new Date().getTime() + 12 * 60 * 60 * 1000;
-            localStorage.setItem('nojaCountdownEnd', countDownDate);
-          }
-        }
-
-        // Update countdown every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-      }
-
       // Progress Animation
       function animateProgress() {
         const progressBars = document.querySelectorAll('.progress-fill');
@@ -637,7 +583,6 @@
 
       // Initialize everything when DOM is loaded
       document.addEventListener('DOMContentLoaded', () => {
-        startCountdown();
         animateProgress();
 
         // Add hover effects for status cards
