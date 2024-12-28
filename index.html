@@ -134,6 +134,7 @@
             margin-bottom: 3rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -156,6 +157,7 @@
             font-size: 4rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0.5rem 0;
             text-shadow: 0 0 30px rgba(0, 255, 163, 0.5);
@@ -228,6 +230,7 @@
             margin-bottom: 0.5rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -511,17 +514,20 @@
             offset: 50
         });
 
-        // Set countdown to end at 10 PM today
-        let endTime = new Date();
-        endTime.setHours(22, 0, 0, 0); // Set to 10 PM
-        
-        // If it's already past 10 PM, set to 10 PM tomorrow
-        if (endTime < new Date()) {
-            endTime.setDate(endTime.getDate() + 1);
-        }
+        // Get or set the end time
+        let endTime = localStorage.getItem('countdownEndTime');
         if (!endTime) {
-            endTime = new Date().getTime() + (12 * 60 * 60 * 1000);
-            localStorage.setItem('countdownEndTime', endTime);
+            // Set initial end time to 10 PM today
+            endTime = new Date();
+            endTime.setHours(22, 0, 0, 0);
+            
+            // If it's already past 10 PM, set to 10 PM tomorrow
+            if (endTime < new Date()) {
+                endTime.setDate(endTime.getDate() + 1);
+            }
+            localStorage.setItem('countdownEndTime', endTime.getTime());
+        } else {
+            endTime = parseInt(endTime);
         }
 
         function updateCountdown() {
@@ -540,45 +546,22 @@
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            // Add smooth animation for number changes
-            const elements = {
-                hours: document.getElementById('hours'),
-                minutes: document.getElementById('minutes'),
-                seconds: document.getElementById('seconds')
-            };
-
-            for (const [unit, element] of Object.entries({
-                hours: hours,
-                minutes: minutes,
-                seconds: seconds
-            })) {
-                const newValue = unit === 'hours' ? hours : String(element).padStart(2, '0');
-                if (element.textContent !== newValue) {
-                    element.style.transform = 'translateY(-20px)';
-                    element.style.opacity = '0';
-                    setTimeout(() => {
-                        element.textContent = newValue;
-                        element.style.transform = 'translateY(0)';
-                        element.style.opacity = '1';
-                    }, 200);
-                }
-            }
+            // Update countdown values
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 
             // Update progress bar
-            const totalTime = 12 * 60 * 60 * 1000;
-            const elapsed = totalTime - timeLeft;
-            const progress = (elapsed / totalTime) * 100;
+            const totalTime = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+            const elapsedTime = totalTime - timeLeft;
+            const progress = Math.min((elapsedTime / totalTime) * 100, 100);
             document.getElementById('progressBar').style.width = `${progress}%`;
 
+            // Continue updating
             requestAnimationFrame(updateCountdown);
         }
 
-        // Add smooth transitions for countdown values
-        const countdownValues = document.querySelectorAll('.countdown-value');
-        countdownValues.forEach(value => {
-            value.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
-        });
-
+        // Start the countdown immediately
         updateCountdown();
     </script>
 </body>
