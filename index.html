@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOJA - تجربه نوین خرید آنلاین</title>
+    
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@100;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --bg-dark: #0a0c1b;
+            --primary: #3a0ca3;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+        }
+
+        body {
+            font-family: 'Vazirmatn', system-ui;
+            background: linear-gradient(135deg, var(--bg-dark), var(--primary));
+            min-height: 100vh;
+            color: white;
+        }
+
+        h1, h2, h3, .display-text {
+            font-family: 'Lalezar', cursive;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.5s ease-out;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .main-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="glass-effect p-4">
+                        <h2 class="display-text gradient-text mb-4">NOJA</h2>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <div class="countdown mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content py-5">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <div class="glass-effect p-5">
+                        <h1 class="display-4 gradient-text mb-4">نوژا</h1>
+                        <p class="h3 mb-4">تجربه‌ای نوین در خرید آنلاین جهانی</p>
+                        <p class="lead">با نوژا، مرزهای خرید آنلاین را پشت سر بگذارید</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="glass-effect p-4 h-100 text-center">
+                        <div class="feature-icon">🌐</div>
+                        <h3>خرید جهانی</h3>
+                        <p>دسترسی آسان به فروشگاه‌های معتبر بین‌المللی</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-effect p-4 h-100 text-center">
+                        <div class="feature-icon">💳</div>
+                        <h3>پرداخت آسان</h3>
+                        <p>پرداخت ایمن به ریال بدون نیاز به کارت بین‌المللی</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-effect p-4 h-100 text-center">
+                        <div class="feature-icon">🚚</div>
+                        <h3>تحویل مطمئن</h3>
+                        <p>ارسال سریع و مطمئن با قابلیت رهگیری سفارش</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderContainer = document.querySelector('.loader-container');
+            const mainContent = document.querySelector('.main-content');
+            const progressBar = document.querySelector('.progress');
+            const countdown = document.querySelector('.countdown');
+
+            // Convert 12 hours to milliseconds
+            const totalTime = 12 * 60 * 60 * 1000;
+            const startTime = Date.now();
+
+            function updateLoader() {
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - startTime;
+                const remainingTime = totalTime - elapsedTime;
+                
+                if (remainingTime <= 0) {
+                    loaderContainer.style.opacity = '0';
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transform = 'translateY(0)';
+                    
+                    setTimeout(() => {
+                        loaderContainer.style.display = 'none';
+                    }, 500);
+                    
+                    return;
+                }
+
+                const progress = (elapsedTime / totalTime) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                const hours = Math.floor(remainingTime / (60 * 60 * 1000));
+                const minutes = Math.floor((remainingTime % (60 * 60 * 1000)) / (60 * 1000));
+                countdown.textContent = `${hours} ساعت و ${minutes} دقیقه تا راه‌اندازی`;
+
+                requestAnimationFrame(updateLoader);
+            }
+
+            updateLoader();
+        });
+    </script>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
