@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NOJA - آینده خرید جهانی</title>
+    <title>NOJA - آینده خرید جهانی | در حال راه‌اندازی</title>
+    <meta
+      name="description"
+      content="NOJA - پلتفرم خرید جهانی برای کاربران ایرانی. به زودی در دسترس خواهد بود."
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -33,6 +37,8 @@
         );
         --card-bg: rgba(255, 255, 255, 0.03);
         --card-border: rgba(255, 255, 255, 0.1);
+        --error-color: #ff4e4e;
+        --success-color: #00ffa3;
       }
 
       * {
@@ -45,190 +51,136 @@
         font-family: 'Vazirmatn', sans-serif;
         background: var(--bg-primary);
         color: var(--text-primary);
-        min-height: 100vh;
+        line-height: 1.6;
         overflow-x: hidden;
-        scroll-behavior: smooth;
       }
 
+      /* Enhanced sections with perspective */
       section {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem 0;
+        padding: 4rem 0;
+        perspective: 1000px;
+        position: relative;
       }
 
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 0 2rem;
         position: relative;
       }
 
-      /* Glowing background effects */
+      /* Enhanced glowing effects */
       .glow {
-        position: absolute;
-        width: 500px;
-        height: 500px;
+        position: fixed;
+        width: 600px;
+        height: 600px;
         border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.15;
+        filter: blur(120px);
+        opacity: 0.12;
         pointer-events: none;
+        transition: all 0.5s ease;
       }
 
       .glow-1 {
         background: var(--accent-primary);
-        top: -200px;
-        right: -200px;
+        top: -300px;
+        right: -300px;
+        animation: glow1 15s infinite alternate;
       }
 
       .glow-2 {
         background: var(--accent-secondary);
-        bottom: -200px;
-        left: -200px;
+        bottom: -300px;
+        left: -300px;
+        animation: glow2 15s infinite alternate;
       }
 
-      /* Hero Section */
+      @keyframes glow1 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(-100px, 100px);
+        }
+      }
+
+      @keyframes glow2 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(100px, -100px);
+        }
+      }
+
+      /* Enhanced Hero Section */
       .hero {
-        position: relative;
         text-align: center;
+        padding: 2rem 0;
       }
 
       .hero-content {
-        max-width: 800px;
-        margin: 0 auto;
+        transform-style: preserve-3d;
+        position: relative;
       }
 
       .logo-container {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+        position: relative;
       }
 
       .logo-image {
         max-width: 300px;
         height: auto;
-        filter: drop-shadow(0 0 20px rgba(0, 255, 163, 0.3));
+        filter: drop-shadow(0 0 25px rgba(0, 255, 163, 0.4));
+        animation: logoFloat 6s ease-in-out infinite;
       }
 
-      .scroll-indicator {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        color: var(--text-secondary);
-        animation: bounce 2s infinite;
-        text-align: center;
-      }
-
-      .scroll-indicator span {
-        display: block;
-        margin-bottom: 1rem;
-        font-size: 0.9rem;
-      }
-
-      .scroll-indicator i {
-        font-size: 1.5rem;
-      }
-
-      @keyframes bounce {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-10px);
-        }
-        60% {
-          transform: translateY(-5px);
-        }
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 3rem;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .slogan-wrapper {
-        margin: 4rem 0;
-        perspective: 1000px;
-      }
-
-      .slogan {
-        font-family: 'Lalezar', cursive;
-        font-size: 3rem;
-        color: var(--text-primary);
-        margin: 0.5rem 0;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        transform-style: preserve-3d;
-      }
-
-      .slogan-accent {
-        font-family: 'Lalezar', cursive;
-        font-size: 4rem;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin: 0.5rem 0;
-        text-shadow: 0 0 30px rgba(0, 255, 163, 0.5);
-        animation: float 3s ease-in-out infinite;
-      }
-
-      @keyframes float {
+      @keyframes logoFloat {
         0%,
         100% {
           transform: translateY(0) rotateX(0);
         }
         50% {
-          transform: translateY(-10px) rotateX(5deg);
+          transform: translateY(-15px) rotateX(5deg);
         }
       }
 
-      /* Countdown Section */
+      /* Enhanced Countdown Section */
+      .countdown-section {
+        padding: 4rem 0;
+        background: var(--gradient-dark);
+        border-radius: 30px;
+        margin: 2rem 0;
+        backdrop-filter: blur(10px);
+      }
+
       .countdown-container {
         display: flex;
         justify-content: center;
         gap: 2rem;
-        margin-bottom: 4rem;
+        margin: 3rem 0;
       }
 
       .countdown-item {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 20px;
         padding: 2rem;
         min-width: 150px;
-        backdrop-filter: blur(10px);
+        text-align: center;
         position: relative;
         overflow: hidden;
-        animation: pulse 2s infinite;
         transform-style: preserve-3d;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
       }
 
       .countdown-item:hover {
-        transform: translateZ(20px) rotateX(10deg);
-        border-color: var(--accent-primary);
-        box-shadow: 0 0 30px rgba(0, 255, 163, 0.2);
-      }
-
-      @keyframes pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(0, 255, 163, 0.4);
-        }
-        70% {
-          box-shadow: 0 0 0 10px rgba(0, 255, 163, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(0, 255, 163, 0);
-        }
+        transform: translateZ(20px);
       }
 
       .countdown-item::before {
@@ -237,7 +189,7 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 1px;
+        height: 2px;
         background: var(--gradient-primary);
         opacity: 0.5;
       }
@@ -245,27 +197,44 @@
       .countdown-value {
         font-size: 3.5rem;
         font-weight: 700;
-        margin-bottom: 0.5rem;
         background: var(--gradient-primary);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
       }
 
-      .countdown-label {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        font-weight: 300;
+      /* Enhanced Progress Bars */
+      .progress-section {
+        padding: 4rem 0;
       }
 
-      /* Progress Section */
       .progress-container {
         background: var(--card-bg);
-        border-radius: 30px;
+        border-radius: 20px;
         padding: 2rem;
-        margin-bottom: 4rem;
+        margin: 2rem 0;
         border: 1px solid var(--card-border);
-        backdrop-filter: blur(10px);
+      }
+
+      .progress-item {
+        margin: 2rem 0;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .progress-title {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .progress-percentage {
+        color: var(--accent-primary);
+        font-weight: 700;
       }
 
       .progress-bar {
@@ -273,40 +242,70 @@
         background: rgba(255, 255, 255, 0.1);
         border-radius: 4px;
         overflow: hidden;
-        margin: 1rem 0;
+        position: relative;
       }
 
       .progress-fill {
         height: 100%;
         background: var(--gradient-primary);
-        width: 0%;
-        transition: width 0.5s ease;
-        box-shadow: 0 0 20px var(--accent-primary);
+        border-radius: 4px;
+        position: relative;
+        transition: width 1.5s ease-in-out;
       }
 
-      /* Deployment Steps */
-      .steps-container {
+      .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: progressShine 2s infinite;
+      }
+
+      @keyframes progressShine {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Enhanced System Status Section */
+      .status-section {
+        padding: 4rem 0;
+      }
+
+      .status-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
-        margin-top: 4rem;
+        margin: 2rem 0;
       }
 
-      .step-card {
+      .status-card {
         background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: 20px;
         padding: 2rem;
+        position: relative;
+        overflow: hidden;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
       }
 
-      .step-card:hover {
+      .status-card:hover {
         transform: translateY(-5px);
         border-color: var(--accent-primary);
       }
 
-      .step-icon {
+      .status-icon {
         width: 60px;
         height: 60px;
         background: var(--gradient-dark);
@@ -319,35 +318,18 @@
         color: var(--accent-primary);
       }
 
-      .step-title {
+      .status-title {
         font-size: 1.2rem;
         margin-bottom: 1rem;
-        font-weight: 500;
+        color: var(--text-primary);
       }
 
-      .step-description {
+      .status-text {
         color: var(--text-secondary);
-        line-height: 1.6;
-        font-weight: 300;
         margin-bottom: 1.5rem;
       }
 
-      .step-number {
-        position: absolute;
-        top: -1rem;
-        right: -1rem;
-        width: 2.5rem;
-        height: 2.5rem;
-        background: var(--gradient-primary);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-
-      .step-progress {
+      .status-progress {
         width: 100%;
         height: 4px;
         background: rgba(255, 255, 255, 0.1);
@@ -355,62 +337,38 @@
         overflow: hidden;
       }
 
-      .step-progress-bar {
+      .status-progress-bar {
         height: 100%;
         background: var(--gradient-primary);
         border-radius: 2px;
         transition: width 1.5s ease-in-out;
       }
 
-      .step-card {
-        position: relative;
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-style: preserve-3d;
-      }
-
-      .step-card:hover {
-        transform: translateY(-10px) rotateX(10deg) rotateY(5deg);
-        box-shadow: 0 20px 40px rgba(0, 255, 163, 0.2);
-      }
-
-      .step-card:hover .step-icon {
-        animation: iconPulse 1s infinite;
-      }
-
-      .step-card:hover .step-progress-bar {
-        animation: progressGlow 1.5s infinite;
-      }
-
-      @keyframes iconPulse {
+      /* Enhanced Animation Effects */
+      @keyframes pulse {
         0% {
           transform: scale(1);
         }
         50% {
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
         100% {
           transform: scale(1);
         }
       }
 
-      @keyframes progressGlow {
-        0% {
-          box-shadow: 0 0 5px var(--accent-primary);
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
         }
         50% {
-          box-shadow: 0 0 20px var(--accent-primary);
-        }
-        100% {
-          box-shadow: 0 0 5px var(--accent-primary);
+          transform: translateY(-10px);
         }
       }
 
       /* Responsive Design */
       @media (max-width: 768px) {
-        .logo {
-          font-size: 3.5rem;
-        }
-
         .countdown-container {
           flex-direction: column;
           align-items: center;
@@ -418,74 +376,66 @@
 
         .countdown-item {
           width: 100%;
-          max-width: 300px;
+          max-width: 280px;
         }
 
-        .steps-container {
+        .status-grid {
           grid-template-columns: 1fr;
         }
       }
 
-      .loader {
-        margin: 2rem auto 4rem;
-        width: 60px;
-        height: 60px;
-        position: relative;
-        border: 6px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        animation: spinner 1.2s linear infinite;
-      }
-      .loader-inner {
-        display: block;
+      /* Loading Animation */
+      .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        background: var(--gradient-primary);
-        border-radius: 50%;
-        transform: scale(0.6);
+        background: var(--bg-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.5s ease;
       }
-      @keyframes spinner {
+
+      .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(0, 255, 163, 0.1);
+        border-left-color: var(--accent-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
         100% {
           transform: rotate(360deg);
         }
       }
-
-      .sections-loader-wrapper {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 2rem;
-      }
-      .section-loader-item {
-        text-align: center;
-        margin: 0 1rem;
-      }
-      .section-loader-item i {
-        font-size: 2rem;
-        margin: 1rem 0;
-        color: var(--accent-primary);
-      }
-      .mini-loader {
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255, 255, 255, 0.2);
-        margin: 0 auto 1rem;
-        animation: spinner 1.2s linear infinite;
-      }
     </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div class="loading-container" id="loadingScreen">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Content -->
     <div class="container">
       <div class="glow glow-1"></div>
       <div class="glow glow-2"></div>
 
+      <!-- Hero Section -->
       <section class="hero">
         <div class="hero-content" data-aos="fade-up">
           <div class="logo-container">
             <img src="assets/noja-logo.png" alt="NOJA" class="logo-image" />
           </div>
           <div class="slogan-wrapper">
-            <p class="slogan" data-aos="zoom-in" data-aos-delay="500">
+            <h1 class="slogan" data-aos="zoom-in" data-aos-delay="500">
               خرید جهانی
-            </p>
+            </h1>
             <p class="slogan-accent" data-aos="zoom-in" data-aos-delay="800">
               به سادگی
             </p>
@@ -493,55 +443,120 @@
               خرید محلی
             </p>
           </div>
-          <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+        </div>
+      </section>
+
+      <!-- Countdown Section -->
+      <section class="countdown-section" data-aos="fade-up">
+        <h2 class="section-title">راه‌اندازی سیستم</h2>
+        <div class="countdown-container">
+          <div class="countdown-item">
+            <div class="countdown-value" id="hours">12</div>
+            <div class="countdown-label">ساعت</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="minutes">00</div>
+            <div class="countdown-label">دقیقه</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="seconds">00</div>
+            <div class="countdown-label">ثانیه</div>
           </div>
         </div>
       </section>
 
-      <section class="loader-section">
-        <h2 class="section-title">در حال آماده‌سازی...</h2>
-        <div class="loader">
-          <span class="loader-inner"></span>
+      <!-- Progress Section -->
+      <section class="progress-section" data-aos="fade-up">
+        <h2 class="section-title">پیشرفت راه‌اندازی</h2>
+        <div class="progress-container">
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-title">راه‌اندازی سرور</span>
+              <span class="progress-percentage" data-progress="95">95%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 95%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-title">پیکربندی دیتابیس</span>
+              <span class="progress-percentage" data-progress="88">88%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 88%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-title">بهینه‌سازی عملکرد</span>
+              <span class="progress-percentage" data-progress="75">75%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="progress-title">تست‌های امنیتی</span>
+              <span class="progress-percentage" data-progress="82">82%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 82%"></div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="additional-loader-section">
-        <h2 class="section-title" data-aos="fade-up">بخش‌های در حال ساخت</h2>
-        <div class="sections-loader-wrapper" data-aos="fade-up">
-          <div class="section-loader-item">
-            <i class="fas fa-user-shield"></i>
-            <div class="loader mini-loader">
-              <span class="loader-inner"></span>
+      <!-- System Status Section -->
+      <section class="status-section" data-aos="fade-up">
+        <h2 class="section-title">وضعیت بخش‌های سیستم</h2>
+        <div class="status-grid">
+          <div class="status-card" data-aos="flip-left" data-aos-delay="100">
+            <div class="status-icon">
+              <i class="fas fa-shield-alt"></i>
             </div>
-            <p>بخش مدیریت</p>
-          </div>
-          <div class="section-loader-item">
-            <i class="fas fa-store"></i>
-            <div class="loader mini-loader">
-              <span class="loader-inner"></span>
+            <h3 class="status-title">سیستم احراز هویت</h3>
+            <p class="status-text">در حال پیکربندی نهایی و تست‌های امنیتی</p>
+            <div class="status-progress">
+              <div class="status-progress-bar" style="width: 92%"></div>
             </div>
-            <p>برندها</p>
           </div>
-          <div class="section-loader-item">
-            <i class="fas fa-box-open"></i>
-            <div class="loader mini-loader">
-              <span class="loader-inner"></span>
-            </div>
-            <p>محصولات</p>
-          </div>
-        </div>
-      </section>
 
-      <section class="deployment-section">
-        <h2 class="section-title" data-aos="fade-up">
-          سیستم در حال ساخت و پیکربندی
-        </h2>
-        <div class="placeholder-wrapper" data-aos="fade-up">
-          <p>
-            در حال آماده‌سازی زیرساخت‌های ضروری برای ارائه بهترین تجربه کاربری
-            هستیم.
-          </p>
+          <div class="status-card" data-aos="flip-left" data-aos-delay="200">
+            <div class="status-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3 class="status-title">سیستم سفارش‌گذاری</h3>
+            <p class="status-text">اتصال به درگاه‌های پرداخت و تست تراکنش‌ها</p>
+            <div class="status-progress">
+              <div class="status-progress-bar" style="width: 85%"></div>
+            </div>
+          </div>
+
+          <div class="status-card" data-aos="flip-left" data-aos-delay="300">
+            <div class="status-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="status-title">پایگاه داده</h3>
+            <p class="status-text">بهینه‌سازی عملکرد و پیکربندی نهایی</p>
+            <div class="status-progress">
+              <div class="status-progress-bar" style="width: 88%"></div>
+            </div>
+          </div>
+
+          <div class="status-card" data-aos="flip-left" data-aos-delay="400">
+            <div class="status-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3 class="status-title">سیستم مدیریت محتوا</h3>
+            <p class="status-text">
+              در حال بارگذاری محتوای اولیه و تست‌های نهایی
+            </p>
+            <div class="status-progress">
+              <div class="status-progress-bar" style="width: 78%"></div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -552,6 +567,89 @@
         duration: 1000,
         once: true,
         offset: 50,
+      });
+
+      // Loading Screen
+      window.addEventListener('load', () => {
+        const loadingScreen = document.getElementById('loadingScreen');
+        setTimeout(() => {
+          loadingScreen.style.opacity = '0';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+          }, 500);
+        }, 1500);
+      });
+
+      // Countdown Timer
+      function startCountdown() {
+        // Get the stored end time or set a new one
+        let countDownDate = localStorage.getItem('nojaCountdownEnd');
+        if (!countDownDate) {
+          countDownDate = new Date().getTime() + 12 * 60 * 60 * 1000; // 12 hours
+          localStorage.setItem('nojaCountdownEnd', countDownDate);
+        }
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = countDownDate - now;
+
+          // Time calculations
+          const hours = Math.floor(distance / (1000 * 60 * 60));
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Display results
+          document.getElementById('hours').textContent = hours
+            .toString()
+            .padStart(2, '0');
+          document.getElementById('minutes').textContent = minutes
+            .toString()
+            .padStart(2, '0');
+          document.getElementById('seconds').textContent = seconds
+            .toString()
+            .padStart(2, '0');
+
+          // If countdown is finished, reset it
+          if (distance < 0) {
+            countDownDate = new Date().getTime() + 12 * 60 * 60 * 1000;
+            localStorage.setItem('nojaCountdownEnd', countDownDate);
+          }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      // Progress Animation
+      function animateProgress() {
+        const progressBars = document.querySelectorAll('.progress-fill');
+        progressBars.forEach((bar) => {
+          const targetWidth =
+            bar.parentElement.previousElementSibling.querySelector(
+              '.progress-percentage'
+            ).dataset.progress;
+          bar.style.width = targetWidth + '%';
+        });
+      }
+
+      // Initialize everything when DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        startCountdown();
+        animateProgress();
+
+        // Add hover effects for status cards
+        const statusCards = document.querySelectorAll('.status-card');
+        statusCards.forEach((card) => {
+          card.addEventListener('mouseenter', () => {
+            card.querySelector('.status-icon').style.transform = 'scale(1.1)';
+          });
+          card.addEventListener('mouseleave', () => {
+            card.querySelector('.status-icon').style.transform = 'scale(1)';
+          });
+        });
       });
     </script>
   </body>
